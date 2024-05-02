@@ -7,14 +7,20 @@ readme = "README.md"
 package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.9,<3.12"
 numpy = "^1.26.4"
-keras = "^3.3.3"
+keras = ">=2.15.0,<2.16"
 matplotlib = "^3.8.4"
 pandas = "^2.2.2"
 scikit-learn = "^1.4.2"
 seaborn = "^0.13.2"
-tensorflow = "^2.16.1"
+
+# Issue between poetry and tensorflow metadata since >=2.11
+# This is a temporary workaround
+# related to https://github.com/python-poetry/poetry/issues/8271
+tensorflow-io-gcs-filesystem = "0.31.0"
+tensorflow = "2.15.0"
+tensorflow-intel = {version="^2.15.0", platform = "win32"}
 
 
 [build-system]
