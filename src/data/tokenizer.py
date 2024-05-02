@@ -1,4 +1,3 @@
-from tensorflow.keras.preprocessing.text import Tokenizer
 
 tokenizer = Tokenizer(lower=True, char_level=True, oov_token='-n-')
 tokenizer.fit_on_texts(raw_x_train + raw_x_val + raw_x_test)
