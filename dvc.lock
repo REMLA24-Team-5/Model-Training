@@ -92,3 +92,14 @@ stages:
       hash: md5
       md5: 33b40b9c99b9dbc5dbf016f7adfaed70
       size: 4120881
+  define_model:
+    cmd: python src/models/model_definition.py
+    deps:
+    - path: output/char_index.joblib
+      hash: md5
+      md5: 941dc7e5461b0a429941866a00102b8c
+      size: 444
+    - path: src/models/model_definition.py
+      hash: md5
+      md5: 1aeeede4350319050450f89c7e4d33ef
+      size: 1659

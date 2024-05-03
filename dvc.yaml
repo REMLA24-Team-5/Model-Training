@@ -28,3 +28,25 @@ stages:
     - output/y_test.joblib
     - output/x_val.joblib
     - output/y_val.joblib
+  define_model:
+    cmd: python src/models/model_definition.py
+    deps:
+    - src/models/model_definition.py
+    - output/char_index.joblib
+  train:
+    cmd: python src/models/train.py
+    deps:
+    - src/models/train.py
+    - output/x_train.joblib
+    - output/y_train.joblib
+    - output/x_val.joblib
+    - output/y_val.joblib
+    outs:
+    - output/model.joblib
+  predict:
+    cmd: python src/models/predict.py
+    deps:
+    - src/models/predict.py
+    - output/model.joblib
+    - output/x_test.joblib
+    - output/y_test.joblib
