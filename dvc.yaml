@@ -1,8 +1,8 @@
 stages:
   get_data:
-    cmd: python src/get_data.py
+    cmd: python src/data/get_data.py
     deps:
-    - src/get_data.py
+    - src/data/get_data.py
     outs:
     - output/raw_x_train.joblib
     - output/raw_y_train.joblib
@@ -10,3 +10,21 @@ stages:
     - output/raw_y_test.joblib
     - output/raw_x_val.joblib
     - output/raw_y_val.joblib
+  preprocess:
+    cmd: python src/features/process_data.py
+    deps:
+    - src/features/process_data.py
+    - output/raw_x_train.joblib
+    - output/raw_y_train.joblib
+    - output/raw_x_test.joblib
+    - output/raw_y_test.joblib
+    - output/raw_x_val.joblib
+    - output/raw_y_val.joblib
+    outs:
+    - output/char_index.joblib
+    - output/x_train.joblib
+    - output/y_train.joblib
+    - output/x_test.joblib
+    - output/y_test.joblib
+    - output/x_val.joblib
+    - output/y_val.joblib
