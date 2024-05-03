@@ -1,0 +1,12 @@
+stages:
+  get_data:
+    cmd: python src/get_data.py
+    deps:
+    - src/get_data.py
+    outs:
+    - output/raw_x_train.joblib
+    - output/raw_y_train.joblib
+    - output/raw_x_test.joblib
+    - output/raw_y_test.joblib
+    - output/raw_x_val.joblib
+    - output/raw_y_val.joblib
