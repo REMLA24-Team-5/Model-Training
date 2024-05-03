@@ -101,8 +101,8 @@ stages:
       size: 444
     - path: src/models/model_definition.py
       hash: md5
-      md5: 054540ae8a2501952e15ec92c3dd364e
-      size: 1694
+      md5: 29fe2d3c57e32cc863ec0e15933ccfc2
+      size: 1695
   train:
     cmd: python src/models/train.py
     deps:
