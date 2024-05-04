@@ -1,6 +1,5 @@
 from keras.models import Sequential
 from keras.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense, Dropout
-from model_params import params
 from joblib import load
 
 def getModel():
@@ -16,10 +15,10 @@ def getModel():
               'dataset_dir': "../dataset/small_dataset/"}
 
     model = Sequential()
-    char_index = load('../../output/char_index.joblib')
+    char_index = load('output/char_index.joblib')
     voc_size = len(char_index.keys())
     print("voc_size: {}".format(voc_size))
-    model.add(Embedding(voc_size + 1, 50))
+    model.add(Embedding(voc_size + 1, 50, input_length=200)) # Look into this
 
     model.add(Conv1D(128, 3, activation='tanh'))
     model.add(MaxPooling1D(3))
@@ -49,4 +48,4 @@ def getModel():
     model.add(Flatten())
 
     model.add(Dense(len(params['categories'])-1, activation='sigmoid'))
-    return model
+    return model, params

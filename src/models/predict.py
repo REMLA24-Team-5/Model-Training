@@ -5,10 +5,10 @@ import numpy as np
 
 def main():
     # Load model
-    model = load('../../output/model.joblib')
+    model = load('output/model.joblib')
     # Load test data
-    x_test = load('../../output/x_test.joblib')
-    y_test = load('../../output/y_test.joblib')
+    x_test = load('output/x_test.joblib')
+    y_test = load('output/y_test.joblib')
 
     y_pred = model.predict(x_test, batch_size=1000)
     print(y_pred)
