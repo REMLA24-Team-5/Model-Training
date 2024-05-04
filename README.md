@@ -25,11 +25,9 @@ $ mkdir data
 
 d) For now add data to data directory from https://www.kaggle.com/code/luiscruz/phishing-detection-cnn/input?scriptVersionId=173138322
 
-d) Run scripts
+e) Run pipeline using dvc, optionally push in case changes occured
 
 ```
-$ python src/data/get_data.py
-$ python src/data/process_data.py
-$ python src/models/train.py
-$ python src/models/predict.py
+$ dvc repro
+$ dvc push
 ```
