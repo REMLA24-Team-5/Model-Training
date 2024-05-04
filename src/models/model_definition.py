@@ -1,8 +1,15 @@
+"""Module that defines the model used for training"""
 from keras.models import Sequential
 from keras.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense, Dropout
 from joblib import load
 
-def getModel():
+def get_model():
+    """
+    Builds the model from scratch using the keras library.
+
+    Returns:
+        Sequential: Defined sequential model
+    """
     params = {'loss_function': 'binary_crossentropy',
               'optimizer': 'adam',
               'sequence_length': 200,
@@ -17,7 +24,7 @@ def getModel():
     model = Sequential()
     char_index = load('output/char_index.joblib')
     voc_size = len(char_index.keys())
-    print("voc_size: {}".format(voc_size))
+    print(f"voc_size: {voc_size}")
     model.add(Embedding(voc_size + 1, 50, input_length=200)) # Look into this
 
     model.add(Conv1D(128, 3, activation='tanh'))

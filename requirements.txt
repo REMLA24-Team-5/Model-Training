@@ -6,5 +6,6 @@ scikit_learn==1.4.2
 seaborn==0.13.2
 tensorflow==2.16.1
 dvc==3.50.1
-dvc-gdrive==3.0.1pylint==2.12.2
+dvc-gdrive==3.0.1
 dslinter==2.0.9
+
