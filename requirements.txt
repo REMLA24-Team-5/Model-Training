@@ -7,3 +7,4 @@ seaborn==0.13.2
 tensorflow==2.16.1
 dvc==3.50.1
 dvc-gdrive==3.0.1
+kaggle==1.6.12

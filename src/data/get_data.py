@@ -1,4 +1,5 @@
 from joblib import dump
+import kaggle
 
 def main():
     train = [line.strip() for line in open("data/train.txt", "r").readlines()[1:]]
