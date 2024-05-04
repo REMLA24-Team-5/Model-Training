@@ -25,7 +25,13 @@ $ mkdir data
 
 d) For now add data to data directory from https://www.kaggle.com/code/luiscruz/phishing-detection-cnn/input?scriptVersionId=173138322
 
-e) Run pipeline using dvc, optionally push in case changes occured
+e) Pull the pipeline using dvc from Google Drive
+
+```
+$ dvc pull
+```
+
+f) After implementing changes, run the pipeline and push to the remote
 
 ```
 $ dvc repro
