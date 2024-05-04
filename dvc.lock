@@ -106,6 +106,10 @@ stages:
   train:
     cmd: python src/models/train.py
     deps:
+    - path: output/char_index.joblib
+      hash: md5
+      md5: 941dc7e5461b0a429941866a00102b8c
+      size: 444
     - path: output/x_train.joblib
       hash: md5
       md5: bf8f14fe123c36f899b44ad257c01b68
@@ -122,6 +126,10 @@ stages:
       hash: md5
       md5: 33b40b9c99b9dbc5dbf016f7adfaed70
       size: 4120881
+    - path: src/models/model_definition.py
+      hash: md5
+      md5: 73e98ba19e41a63b9e460b8309ef3153
+      size: 1694
     - path: src/models/train.py
       hash: md5
       md5: b0957b456a2df1a5881a8c04ab588f14
@@ -129,14 +137,14 @@ stages:
     outs:
     - path: output/model.joblib
       hash: md5
-      md5: 5b89cf4f231ce4265f8bb924e43d272c
+      md5: 68190ad597ba49b25797597dad60e36a
       size: 5478323
   predict:
     cmd: python src/models/predict.py
     deps:
     - path: output/model.joblib
       hash: md5
-      md5: 5b89cf4f231ce4265f8bb924e43d272c
+      md5: 68190ad597ba49b25797597dad60e36a
       size: 5478323
     - path: output/x_test.joblib
       hash: md5
