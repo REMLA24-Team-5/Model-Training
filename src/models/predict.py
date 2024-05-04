@@ -1,9 +1,14 @@
+"""Module that classifys a given input"""
 import seaborn as sns
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from joblib import load
 import numpy as np
 
 def main():
+    """
+    Takes in input and predicts using model and outputs results.
+    """
+    np.random.seed()
     # Load model
     model = load('../../output/model.joblib')
     # Load test data
