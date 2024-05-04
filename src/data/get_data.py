@@ -10,7 +10,6 @@ def main():
     
     zip_file_path = 'dl-dataset.zip'
     extracted_dir = 'data' 
-    os.makedirs(extracted_dir, exist_ok=True)
     
     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
         zip_ref.extractall(extracted_dir)

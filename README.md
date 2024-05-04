@@ -23,7 +23,7 @@ $ mkdir output
 $ mkdir data
 ```
 
-d) For now add data to data directory from https://www.kaggle.com/code/luiscruz/phishing-detection-cnn/input?scriptVersionId=173138322
+d) Configure Kaggle API: Make sure you have a Kaggle API token downloaded (kaggle.json) and placed in the appropriate directory (~/.kaggle/ on Unix-based systems or C:\Users\<Windows-username>\.kaggle\ on Windows).
 
 e) Pull the pipeline using dvc from Google Drive
 
