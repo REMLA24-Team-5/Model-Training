@@ -1,4 +1,5 @@
 """Module retrieving the data and persisting it to single files."""
+"""Module retrieving the data and persisting it to single files."""
 from joblib import dump
 
 # pylint: disable=consider-using-with
