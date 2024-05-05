@@ -29,9 +29,33 @@ d) Pull the pipeline using dvc from Google Drive
 $ dvc pull
 ```
 
-e) After implementing changes, run the pipeline and push to the remote
+e) After implementing changes, run the pipeline and push changes, if any, to the remote
 
 ```
 $ dvc repro
 $ dvc push
+```
+
+f) To run experiments and see metrics, do the following commands
+
+1. Show metrics from dvc repro run
+```
+$ dvc metrics show
+```
+2. Run the pipeline and save experiment results.
+ ```
+$ dvc exp run
+$ dvc metrics show
+```
+3. See the difference.
+ ```
+$ dvc metrics diff
+```
+5. Change something in the project (e.g., change the random state) and run a new experiment.
+ ```
+$ dvc exp run
+```
+7. Check the experiment log:
+```
+$ dvc exp show
 ```

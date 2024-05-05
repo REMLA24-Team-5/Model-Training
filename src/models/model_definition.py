@@ -17,7 +17,6 @@ def getModel():
     model = Sequential()
     char_index = load('output/char_index.joblib')
     voc_size = len(char_index.keys())
-    print("voc_size: {}".format(voc_size))
     model.add(Embedding(voc_size + 1, 50, input_length=200)) # Look into this
 
     model.add(Conv1D(128, 3, activation='tanh'))
