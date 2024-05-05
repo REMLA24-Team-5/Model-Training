@@ -1,5 +1,5 @@
-# REMLA-team5
-Simple ML application containing the progress made in the REMLA at the TU Delft
+# URL Phishing | REMLA Team 5
+Simple ML application for detection of Phishing URLs. This repository contains all code to train a new model and test its performance. For installation and usage, see the sections below. The documentation at the end describes the implementation of this repository.
 
 ## Installation
 a) Clone repo.
