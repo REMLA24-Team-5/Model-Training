@@ -1,6 +1,5 @@
 from joblib import dump
 from kaggle.api.kaggle_api_extended import KaggleApi
-import os
 import zipfile
 
 def main():
