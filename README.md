@@ -1,6 +1,7 @@
 # REMLA-team5
 Simple ML application containing the progress made in the REMLA at the TU Delft
 
+## Installation
 a) Clone repo.
 
 ```
@@ -29,6 +30,7 @@ d) Pull the pipeline using dvc from Google Drive
 $ dvc pull
 ```
 
+## Usage
 e) After implementing changes, run the pipeline and push changes, if any, to the remote
 
 ```
@@ -61,3 +63,13 @@ $ dvc exp run
 ```
 $ dvc exp show
 ```
+
+## Documentation
+### Project best practices
+TODO: All decisions are properly documented, supported by related work, and reveal a critical understanding of the theory
+
+### Pipeline Management
+TODO: metrics decision?
+
+### Code Quality
+TODO: The project implements different ways to display code quality information, considers multiple linters, critically analyses linter rules, and proposes new missing ML rules.
