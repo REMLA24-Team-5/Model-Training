@@ -1,6 +1,4 @@
 /venv/
 .idea
-/data
 /output
 *__pycache__*
-dl-dataset.zip
