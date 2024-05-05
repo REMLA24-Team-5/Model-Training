@@ -31,16 +31,16 @@ $ dvc pull
 ```
 
 ## Usage
-e) After implementing changes, run the pipeline and push changes, if any, to the remote
+a) After implementing changes, run the pipeline and push changes, if any, to the remote
 
 ```
 $ dvc repro
 $ dvc push
 ```
 
-f) To run experiments and see metrics, do either of the following commands
+b) To run experiments and see metrics, do either of the following commands
 
-* Show metrics after dvc repro
+* Show metrics after dvc repro:
 ```
 $ dvc repro
 $ dvc metrics show
