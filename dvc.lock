@@ -1,12 +1,24 @@
 schema: '2.0'
 stages:
   get_data:
-    cmd: python src/data/get_data.py
+    cmd: python src/data/get_data.py data/train.txt data/test.txt data/val.txt
     deps:
+    - path: data/test.txt
+      hash: md5
+      md5: a1cab28ad8554fd9269d31e5708469d0
+      size: 32724891
+    - path: data/train.txt
+      hash: md5
+      md5: 13fd241a41370119612d5b00b0433009
+      size: 93921671
+    - path: data/val.txt
+      hash: md5
+      md5: 7b1e28b1e91582c6f36e85517c3cc6ee
+      size: 46258330
     - path: src/data/get_data.py
       hash: md5
-      md5: 4ed9fbd195669dc7d1d8b7a7f75e20df
-      size: 962
+      md5: 2ee255fd4b2dc84abe75ab1b8e8f6b07
+      size: 1268
     outs:
     - path: output/raw_x_test.joblib
       hash: md5
