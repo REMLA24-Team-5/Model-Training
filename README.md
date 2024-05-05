@@ -38,24 +38,26 @@ $ dvc push
 
 f) To run experiments and see metrics, do the following commands
 
-1. Show metrics from dvc repro run
+* Show metrics after dvc repro run
 ```
+$ dvc repro
 $ dvc metrics show
 ```
-2. Run the pipeline and save experiment results.
+* Run an experiment:
+1. Run the pipeline and save experiment results.
  ```
 $ dvc exp run
 $ dvc metrics show
 ```
-3. See the difference.
+2. See the difference.
  ```
 $ dvc metrics diff
 ```
-5. Change something in the project (e.g., change the random state) and run a new experiment.
+3. Change something in the project (e.g., change the random state) and run a new experiment.
  ```
 $ dvc exp run
 ```
-7. Check the experiment log:
+4. Check the experiment log:
 ```
 $ dvc exp show
 ```
