@@ -50,3 +50,6 @@ stages:
     - output/model.joblib
     - output/x_test.joblib
     - output/y_test.joblib
+
+metrics:
+  - output/metrics.json
