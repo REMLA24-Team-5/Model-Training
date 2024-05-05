@@ -38,14 +38,14 @@ $ dvc repro
 $ dvc push
 ```
 
-f) To run experiments and see metrics, do the following commands
+f) To run experiments and see metrics, do either of the following commands
 
-* Show metrics after dvc repro run
+* Show metrics after dvc repro
 ```
 $ dvc repro
 $ dvc metrics show
 ```
-* Run an experiment:
+* Or run an experiment using the following steps:
 1. Run the pipeline and save experiment results.
  ```
 $ dvc exp run
