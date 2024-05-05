@@ -1,5 +1,5 @@
 /venv/
 .idea
-/data
 /output
 *__pycache__*
+/.vscode
