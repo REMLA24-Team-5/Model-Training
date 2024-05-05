@@ -53,7 +53,7 @@ $ dvc metrics show
  ```
 $ dvc metrics diff
 ```
-3. Change something in the project (e.g., change the random state) and run a new experiment.
+3. If you change something, you can check the improved or decreased performance by running a new experiment.
  ```
 $ dvc exp run
 ```
