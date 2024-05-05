@@ -1,9 +1,6 @@
 from joblib import dump
 
 def main():
-
-
-    
     train = [line.strip() for line in open("data/train.txt", "r").readlines()[1:]]
     raw_x_train = [line.split("\t")[1] for line in train]
     raw_y_train = [line.split("\t")[0] for line in train]
