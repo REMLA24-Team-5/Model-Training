@@ -1,6 +1,5 @@
 """Module that trains model given training data."""
 from model_definition import get_model
-from model_params import params
 from joblib import dump, load
 
 def main():
