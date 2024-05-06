@@ -23,17 +23,41 @@ $ mkdir output
 $ mkdir data
 ```
 
-d) For now add data to data directory from https://www.kaggle.com/code/luiscruz/phishing-detection-cnn/input?scriptVersionId=173138322
-
-e) Pull the pipeline using dvc from Google Drive
+d) Pull the pipeline using dvc from Google Drive
 
 ```
 $ dvc pull
 ```
 
-f) After implementing changes, run the pipeline and push to the remote
+e) After implementing changes, run the pipeline and push changes, if any, to the remote
 
 ```
 $ dvc repro
 $ dvc push
+```
+
+f) To run experiments and see metrics, do the following commands
+
+* Show metrics after dvc repro run
+```
+$ dvc repro
+$ dvc metrics show
+```
+* Run an experiment:
+1. Run the pipeline and save experiment results.
+ ```
+$ dvc exp run
+$ dvc metrics show
+```
+2. See the difference.
+ ```
+$ dvc metrics diff
+```
+3. If you change something, you can check the improved or decreased performance by running a new experiment.
+ ```
+$ dvc exp run
+```
+4. Check the experiment log:
+```
+$ dvc exp show
 ```
