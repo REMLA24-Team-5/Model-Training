@@ -20,7 +20,9 @@ $ source venv/bin/activate
 $ pipx install poetry
 $ poetry install
 ```
-If you do not have pipx installed, other installation possibilities can be found in the poetry documentation https://python-poetry.org/docs/
+If you do not have pipx installed, other installation possibilities can be found in the poetry documentation https://python-poetry.org/docs/.
+Note that this project only supports python versions 3.9 and 3.10.
+
 c) create data and output directory
 
 ```
