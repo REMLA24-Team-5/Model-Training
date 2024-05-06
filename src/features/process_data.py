@@ -1,9 +1,15 @@
+"""Module processing data and repersisting it."""
 from sklearn.preprocessing import LabelEncoder
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from joblib import dump, load
 
+# pylint: disable=too-many-locals
+
 def main():
+    """
+    Loads data from joblibs, processes it and stores it again into joblib files.
+    """
     # Load data
     raw_x_train = load('output/raw_x_train.joblib')
     raw_x_val = load('output/raw_x_val.joblib')

@@ -64,6 +64,11 @@ $ dvc exp run
 $ dvc exp show
 ```
 
+5. To run code quality statistical analysis:
+```
+pylint src
+```
+
 ## Documentation
 ### Project best practices
 The team has chosen to use the cookie cutter template for [data science](https://drivendata.github.io/cookiecutter-data-science/) to ensure correct and reproducible code. Moreover, using a popular file structure for such project will make understanding and finding the code easier for people not involved in this particular project. Except for refactoring the code to this template, the team has also reduced all code to include only its main functionality. All exploratory code has been moved into a separate notebook in the notebooks folder.

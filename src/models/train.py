@@ -1,10 +1,14 @@
-from model_definition import getModel
+"""Module that trains model given training data."""
+from model_definition import get_model
 from joblib import dump, load
 
 def main():
+    """
+    Gets the model and trains it given the training and validation data.
+    """
 
     # Get model
-    model, params = getModel()
+    model, params = get_model()
 
     # Load data
     x_train = load('output/x_train.joblib')

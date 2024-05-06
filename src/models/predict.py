@@ -1,10 +1,14 @@
-import seaborn as sns
+"""Module that classifys a given input"""
+import json
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from joblib import load
 import numpy as np
-import json
 
 def main():
+    """
+    Takes in input and predicts using model and outputs results.
+    """
+    np.random.seed()
     # Load model
     model = load('output/model.joblib')
     # Load test data
@@ -43,7 +47,8 @@ def main():
     for i in range(num_classes):
         confusion_mat_string += f" Actual Class {i}" + " " * (12 - len(f" Actual Class {i}")) + "|"
         for j in range(num_classes):
-            confusion_mat_string += f" {confusion_mat[i, j]}" + " " * (10 - len(str(confusion_mat[i, j]))) + "|"
+            entry = confusion_mat[i, j]
+            confusion_mat_string += f" {entry}" + " " * (10 - len(str(entry))) + "|"
         confusion_mat_string += "\n"
 
     # Store confusion matrix string in the output dictionary
@@ -54,7 +59,7 @@ def main():
     output_dict['accuracy'] = accuracy
 
     # Dump collected information to a JSON file
-    with open('output/metrics.json', 'w') as json_file:
+    with open('output/metrics.json', 'w', encoding="utf-8") as json_file:
         json.dump(output_dict, json_file, indent=4)
 
 
