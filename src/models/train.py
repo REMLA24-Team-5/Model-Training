@@ -9,7 +9,7 @@ def main():
     """
 
     # Get model
-    model = get_model()
+    model, params = get_model()
 
     # Load data
     x_train = load('output/x_train.joblib')
