@@ -61,3 +61,8 @@ $ dvc exp run
 ```
 $ dvc exp show
 ```
+
+5. To run code quality statistical analysis:
+```
+pylint src
+```
