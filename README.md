@@ -139,6 +139,90 @@ dependent-threshold-scikitlearn: If threshold-dependent evaluation(e.g., f-score
 dependent-threshold-tensorflow: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
 ```
 
+The result from running pylint on the src code:
+```
+Report
+======
+139 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |9      |9          |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |0      |NC         |NC         |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|method   |0      |NC         |NC         |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+|function |0      |NC         |NC         |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |159    |59.55 |159      |=          |
++----------+-------+------+---------+-----------+
+|docstring |33     |12.36 |33       |=          |
++----------+-------+------+---------+-----------+
+|comment   |22     |8.24  |22       |=          |
++----------+-------+------+---------+-----------+
+|empty     |53     |19.85 |53       |=          |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |0          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |0      |0        |0          |
++-----------+-------+---------+-----------+
+|refactor   |0      |0        |0          |
++-----------+-------+---------+-----------+
+|warning    |0      |0        |0          |
++-----------+-------+---------+-----------+
+|error      |0      |0        |0          |
++-----------+-------+---------+-----------+
+
+
+
+Messages
+--------
+
++-----------+------------+
+|message id |occurrences |
++===========+============+
+
+
+
+
+--------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
+
+```
 
 The project is configured to be able to run the code security scanner Bandit. One line in the preprocessing of data, more specifically in the Tokenization of the input data raised an issue with Bandit. This is because Bandit scans for variables with the string "token" included in the name to check for possible hardcoded passwords. In the ML context, tokens more often than not do not refer to passwords but rather word tokens in Tokenization of input text. Thus, this line of code is skipped when running Bandit.
 Bandit run results:
