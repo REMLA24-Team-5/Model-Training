@@ -70,9 +70,14 @@ $ dvc exp run
 $ dvc exp show
 ```
 
-5. To run code quality statistical analysis:
+c) To run code quality statistical analysis:
 ```
 pylint src
+```
+
+d) To run code security analysis:
+```
+bandit -c bandit.yaml -r .
 ```
 
 ## Documentation
@@ -84,3 +89,26 @@ Given the relatively simple nature of the model outputs, i.e. it uses two classe
 
 ### Code Quality
 TODO: The project implements different ways to display code quality information, considers multiple linters, critically analyses linter rules, and proposes new missing ML rules.
+
+The project is configured to be able to run the code security scanner Bandit. One line in the preprocessing of data, more specifically in the Tokenization of the input data raised an issue with Bandit. This is because Bandit scans for variables with the string "token" included in the name to check for possible hardcoded passwords. In the ML context, tokens more often than not do not refer to passwords but rather word tokens in Tokenization of input text. Thus, this line of code is skipped when running Bandit.
+Bandit run results:
+
+Test results:
+        No issues identified.
+
+Code scanned:
+        Total lines of code: 174
+        Total lines skipped (#nosec): 1
+
+Run metrics:
+        Total issues (by severity):
+                Undefined: 0
+                Low: 0
+                Medium: 0
+                High: 0
+        Total issues (by confidence):
+                Undefined: 0
+                Low: 0
+                Medium: 0
+                High: 0
+Files skipped (0):
