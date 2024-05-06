@@ -1,7 +1,10 @@
 # URL Phishing | REMLA Team 5
 Simple ML application for detection of Phishing URLs. This repository contains all code to train a new model and test its performance. For installation and usage, see the sections below. The documentation at the end describes the implementation of this repository.
 
+
+
 ## Installation
+
 a) Clone repo.
 
 ```
@@ -14,8 +17,11 @@ b) Install dependencies.
 ```
 $ python -m venv venv
 $ source venv/bin/activate
-$ pip install -r requirements.txt
+$ pipx install poetry
+$ poetry install
 ```
+If you do not have pipx installed, other installation possibilities can be found in the poetry documentation https://python-poetry.org/docs/.
+Note that this project only supports python versions 3.9 and 3.10.
 
 c) create data and output directory
 
