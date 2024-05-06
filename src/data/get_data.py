@@ -1,6 +1,7 @@
 """Module retrieving the data and persisting it to single files."""
 import sys
 from joblib import dump
+import gdown
 
 # pylint: disable=consider-using-with
 
@@ -17,6 +18,9 @@ def main():
     train_data = sys.argv[1]
     test_data = sys.argv[2]
     val_data = sys.argv[3]
+
+    gdown.download_folder('https://drive.google.com/drive/folders/1_NobSEMZS8jogSAEZ9ZLBUTemPiASJRg',
+                          output="data", quiet=False)
 
     train = [line.strip() for line in open(train_data, "r", encoding="utf-8").readlines()[1:]]
     raw_x_train = [line.split("\t")[1] for line in train]

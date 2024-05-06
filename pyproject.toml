@@ -25,6 +25,7 @@ tensorflow-intel = {version="^2.15.0", platform = "win32"}
 dvc = "3.50.1"
 dvc-gdrive = "3.0.1"
 dslinter = "2.0.9"
+gdown = "^5.1.0"
 
 
 [build-system]
