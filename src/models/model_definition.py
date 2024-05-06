@@ -1,16 +1,8 @@
 """Module that defines the model used for training"""
-"""Module that defines the model used for training"""
 from keras.models import Sequential
 from keras.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense, Dropout
 from joblib import load
 
-def get_model():
-    """
-    Builds the model from scratch using the keras library.
-
-    Returns:
-        Sequential: Defined sequential model
-    """
 def get_model():
     """
     Builds the model from scratch using the keras library.
