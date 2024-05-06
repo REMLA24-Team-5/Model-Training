@@ -73,8 +73,8 @@ stages:
       size: 6238409
     - path: src/features/process_data.py
       hash: md5
-      md5: 015fb0faa169abec8d18aed0c9878fde
-      size: 1792
+      md5: 7bb019372acf7afe31f49e13100d3daa
+      size: 1893
     outs:
     - path: output/char_index.joblib
       hash: md5
