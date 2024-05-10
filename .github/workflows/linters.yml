@@ -20,7 +20,7 @@ jobs:
         pip install pylint==2.17
     - name: Analysing the code with pylint, score should be 10
       run: |
-        pylint src/ --rcfile=.pylintrc --fail-under=10.0
+        pylint src/ --fail-under=10.0
     - name: Install dependencies for bandit
       run: |
         pip install bandit
