@@ -26,5 +26,4 @@ jobs:
         pip install bandit
     - name: Analysing the code with bandit, no security issues should be found
       run: |
-        bandit -c bandit.yaml -r . --exit-zero
-        
+        bandit -c bandit.yaml -r .
