@@ -19,7 +19,7 @@ def main():
     raw_y_test = load('output/raw_y_test.joblib')
 
     # We mark this line as nosec to let Bandit know that this token is not a password token
-    tokenizer = Tokenizer(lower=True, char_level=True, oov_token='-n-') #
+    tokenizer = Tokenizer(lower=True, char_level=True, oov_token='-n-') # nosec
     tokenizer.fit_on_texts(raw_x_train + raw_x_val + raw_x_test)
     char_index = tokenizer.word_index
     dump(char_index, 'output/char_index.joblib')
