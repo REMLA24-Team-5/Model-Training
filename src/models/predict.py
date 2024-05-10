@@ -5,6 +5,9 @@ from joblib import load
 import numpy as np
 
 def main():
+    """
+    Takes in input and predicts using model and outputs results.
+    """
     np.random.seed()
     # Load model
     model = load('output/model.joblib')
