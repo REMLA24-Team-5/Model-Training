@@ -2082,6 +2082,27 @@ files = [
 ]
 
 [[package]]
+name = "lib-ml"
+version = "v0.1.0"
+description = "Contains the pre-processing logic for data that is used for training or queries."
+optional = false
+python-versions = ">=3.9,<3.11"
+files = []
+develop = false
+
+[package.dependencies]
+scikit-learn = "^1.4.2"
+tensorflow = "2.15.0"
+tensorflow-intel = {version = "^2.15.0", markers = "sys_platform == \"win32\""}
+tensorflow-io-gcs-filesystem = "0.31.0"
+
+[package.source]
+type = "git"
+url = "https://github.com/REMLA24-Team-5/lib-ml"
+reference = "v0.1.1"
+resolved_reference = "ff74792acb0488fc2752f97786440159728b7e78"
+
+[[package]]
 name = "libclang"
 version = "18.1.1"
 description = "Clang Python Bindings, mirrored from the official LLVM repo: https://github.com/llvm/llvm-project/tree/main/clang/bindings/python, to make the installation process easier."
@@ -4401,4 +4422,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.11"
-content-hash = "1c15f542c6943a9baa6253357b23d8133913320a06b920ff0e4cdb62a44d91e2"
+content-hash = "062bfb18f9278a63b2f7dddaf5c8dacdd54f88702dfef8fa498371137f3df3fd"
