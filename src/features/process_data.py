@@ -1,8 +1,7 @@
 """Module processing data and repersisting it."""
-from sklearn.preprocessing import LabelEncoder
-from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
 from joblib import dump, load
+import importlib
+pre_process = importlib.import_module('lib-ml.pre_process')
 
 # pylint: disable=too-many-locals
 
@@ -18,26 +17,20 @@ def main():
     raw_y_val = load('output/raw_y_val.joblib')
     raw_y_test = load('output/raw_y_test.joblib')
 
-    # We mark this line as nosec to let Bandit know that this token is not a password token
-    tokenizer = Tokenizer(lower=True, char_level=True, oov_token='-n-') # nosec
-    tokenizer.fit_on_texts(raw_x_train + raw_x_val + raw_x_test)
-    char_index = tokenizer.word_index
-    dump(char_index, 'output/char_index.joblib')
-    sequence_length=200
-    x_train = pad_sequences(tokenizer.texts_to_sequences(raw_x_train), maxlen=sequence_length)
-    x_val = pad_sequences(tokenizer.texts_to_sequences(raw_x_val), maxlen=sequence_length)
-    x_test = pad_sequences(tokenizer.texts_to_sequences(raw_x_test), maxlen=sequence_length)
+    preprocessor = pre_process.Preprocessing(raw_x_train, raw_y_train, raw_x_test, raw_x_val)
+    x_train = preprocessor.process_dataset(raw_x_train)
+    x_val = preprocessor.process_dataset(raw_x_val)
+    x_test = preprocessor.process_dataset(raw_x_test)
 
     # Store processed data
     dump(x_train, 'output/x_train.joblib')
     dump(x_val, 'output/x_val.joblib')
     dump(x_test, 'output/x_test.joblib')
+    dump(preprocessor.get_char_index(), 'output/char_index.joblib')
 
-    encoder = LabelEncoder()
-
-    y_train = encoder.fit_transform(raw_y_train)
-    y_val = encoder.transform(raw_y_val)
-    y_test = encoder.transform(raw_y_test)
+    y_train = preprocessor.process_labels(raw_y_train)
+    y_val = preprocessor.process_labels(raw_y_val)
+    y_test = preprocessor.process_labels(raw_y_test)
 
     # Store processed data
     dump(y_train, 'output/y_train.joblib')
