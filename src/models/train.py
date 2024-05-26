@@ -26,6 +26,7 @@ def main():
                 )
     # Save model
     dump(model, 'output/model.joblib')
+    dump(model, 'test/data/model.joblib')
 
 if __name__ == "__main__":
     main()
