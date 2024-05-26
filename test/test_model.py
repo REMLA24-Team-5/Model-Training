@@ -67,3 +67,21 @@ def test_predict_phising(model):
     prediction_binary = (np.array(prediction) > 0.5).astype(int)
 
     assert prediction_binary == 1
+
+
+def test_mutamorphic(model):
+    model, preprocesor = model
+
+    input_1 = "http://google.com"
+    input_1_preprocessed = preprocesor.process_URL(input).reshape(1,200,1)
+
+    input_2 = "https://google.nl"
+    input_2_preprocessed = preprocesor.process_URL(input_2).reshape(1,200,1)
+    # Make predictions using the pre-trained model
+    prediction_1 = model.predict(input_1, batch_size=1)
+    prediction_binary_1 = (np.array(prediction_1) > 0.5).astype(int)
+
+    prediction_2 = model.predict(input_2, batch_size=1)
+    prediction_binary_2 = (np.array(prediction_2) > 0.5).astype(int)
+
+    assert prediction_binary_1 == prediction_binary_2
