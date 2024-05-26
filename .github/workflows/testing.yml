@@ -18,6 +18,15 @@ jobs:
       run: | 
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Run poetry
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+    - name: View poetry --help
+      run: poetry --help
+      
+    - name: Install packages
+      run: poetry install
     - name: Run Pytest
       run: |
         pytest
