@@ -47,7 +47,7 @@ def model():
 
 
 def test_model_definition(model):
-    model, params = get_model(os.path.join('data', 'char_index.joblib'))
+    model, params = get_model(os.path.join('test/data', 'char_index.joblib'))
     conv1d_count = sum(1 for layer in model.layers if isinstance(layer, Conv1D))
     dropout_count = sum(1 for layer in model.layers if isinstance(layer, Dropout))
     pool_count = sum(1 for layer in model.layers if isinstance(layer, MaxPooling1D))
@@ -60,6 +60,8 @@ def test_model_definition(model):
     assert pool_count == expected_pool_count
 
         
+def test_model_training(model):
+    
 
 def test_predict_legitimate(model):
     model, preprocesor = model
