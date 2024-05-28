@@ -59,9 +59,6 @@ def test_model_definition(model):
     assert dropout_count == expected_dropout_count
     assert pool_count == expected_pool_count
 
-        
-def test_model_training(model):
-    
 
 def test_predict_legitimate(model):
     model, preprocesor = model
