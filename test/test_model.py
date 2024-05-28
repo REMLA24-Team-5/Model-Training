@@ -9,7 +9,7 @@ from joblib import load
 from keras.layers import Conv1D, MaxPooling1D, Dropout
 from src.data.get_data import get_data
 from src.models.model_definition import get_model
-
+from keras.models import load_model
 pre_process = importlib.import_module('lib-ml.pre_process')
 
 
@@ -37,16 +37,15 @@ def fetch_preprocessing():
 
 
 @pytest.fixture(scope="session", autouse=True)
-def model():
-    model = load('test/data/model.joblib')
+def preprocessor():
     preprocessor = fetch_preprocessing()
-    yield model, preprocessor  # Provide the data to the tests
+    yield preprocessor  # Provide the data to the tests
     os.remove('test/data/train.txt')
     os.remove('test/data/test.txt')
     os.remove('test/data/val.txt')
 
 
-def test_model_definition(model):
+def test_model_definition(preprocessor):
     model, params = get_model(os.path.join('test/data', 'char_index.joblib'))
     conv1d_count = sum(1 for layer in model.layers if isinstance(layer, Conv1D))
     dropout_count = sum(1 for layer in model.layers if isinstance(layer, Dropout))
@@ -60,10 +59,10 @@ def test_model_definition(model):
     assert pool_count == expected_pool_count
 
 
-def test_predict_legitimate(model):
-    model, preprocesor = model
+def test_predict_legitimate(preprocessor):
+    model, params = get_model(os.path.join('test/data', 'char_index.joblib'))
     input = "https://google.com"
-    input_preprocessed = preprocesor.process_URL(input).reshape(1,200,1)
+    input_preprocessed = preprocessor.process_URL(input).reshape(1,200,1)
 
     # Make predictions using the pre-trained model
     prediction = model.predict(input_preprocessed, batch_size=1)
@@ -73,10 +72,10 @@ def test_predict_legitimate(model):
 
     assert prediction_binary == 0
 
-def test_predict_phising(model):
-    model, preprocesor = model
+def test_predict_phising(preprocessor):
+    model, params = get_model(os.path.join('test/data', 'char_index.joblib'))
     input = "http://txcvg.h.zz.zxx"
-    input_preprocessed = preprocesor.process_URL(input).reshape(1,200,1)
+    input_preprocessed = preprocessor.process_URL(input).reshape(1,200,1)
 
     # Make predictions using the pre-trained model
     prediction = model.predict(input_preprocessed, batch_size=1)
@@ -87,14 +86,15 @@ def test_predict_phising(model):
     assert prediction_binary == 1
 
 
-def test_mutamorphic(model):
-    model, preprocesor = model
+def test_mutamorphic(preprocessor):
+    model, params = get_model(os.path.join('test/data', 'char_index.joblib'))
 
+    model.load_weights('test/data/model.h5')
     input_1 = "http://google.com"
-    input_1_preprocessed = preprocesor.process_URL(input_1).reshape(1,200,1)
+    input_1_preprocessed = preprocessor.process_URL(input_1).reshape(1,200,1)
 
     input_2 = "https://google.nl"
-    input_2_preprocessed = preprocesor.process_URL(input_2).reshape(1,200,1)
+    input_2_preprocessed = preprocessor.process_URL(input_2).reshape(1,200,1)
     # Make predictions using the pre-trained model
     prediction_1 = model.predict(input_1_preprocessed, batch_size=1)
     prediction_binary_1 = (np.array(prediction_1) > 0.5).astype(int)
