@@ -8,7 +8,7 @@ def main():
     """
 
     # Get model
-    model, params = get_model()
+    model, params = get_model('output/char_index.joblib')
 
     # Load data
     x_train = load('output/x_train.joblib')

@@ -1,10 +1,15 @@
 
 import importlib
+import shutil
 import pytest
 import gdown
 import numpy as np
 import os
 from joblib import load
+from keras.layers import Conv1D, MaxPooling1D, Dropout
+from src.data.get_data import get_data
+from src.models.model_definition import get_model
+
 pre_process = importlib.import_module('lib-ml.pre_process')
 
 
@@ -41,6 +46,20 @@ def model():
     os.remove('test/data/val.txt')
 
 
+def test_model_definition(model):
+    model, params = get_model(os.path.join('data', 'char_index.joblib'))
+    conv1d_count = sum(1 for layer in model.layers if isinstance(layer, Conv1D))
+    dropout_count = sum(1 for layer in model.layers if isinstance(layer, Dropout))
+    pool_count = sum(1 for layer in model.layers if isinstance(layer, MaxPooling1D))
+    expected_conv1d_count = 7  # Based on your model definition    conv1d_count = sum(1 for layer in model.layers if isinstance(layer, Conv1D))
+    expected_dropout_count = 7
+    expected_pool_count = 4
+
+    assert conv1d_count == expected_conv1d_count
+    assert dropout_count == expected_dropout_count
+    assert pool_count == expected_pool_count
+
+        
 
 def test_predict_legitimate(model):
     model, preprocesor = model

@@ -5,7 +5,9 @@ pre_process = importlib.import_module('lib-ml.pre_process')
 
 # pylint: disable=too-many-locals
 
-def main():
+
+
+def process_data():
     """
     Loads data from joblibs, processes it and stores it again into joblib files.
     """
@@ -38,4 +40,4 @@ def main():
     dump(y_test, 'output/y_test.joblib')
 
 if __name__ == "__main__":
-    main()
+    process_data()
