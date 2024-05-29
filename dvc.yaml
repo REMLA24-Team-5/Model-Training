@@ -1,6 +1,6 @@
 stages:
   get_data:
-    cmd: python src/data/get_data.py data/train.txt data/test.txt data/val.txt
+    cmd: python src/data/get_data.py
     deps:
     - src/data/get_data.py
     - data/train.txt
@@ -42,12 +42,12 @@ stages:
     - output/x_val.joblib
     - output/y_val.joblib
     outs:
-    - output/model.joblib
+    - output/model.h5
   predict:
     cmd: python src/models/predict.py
     deps:
     - src/models/predict.py
-    - output/model.joblib
+    - output/model.h5
     - output/x_test.joblib
     - output/y_test.joblib
 
