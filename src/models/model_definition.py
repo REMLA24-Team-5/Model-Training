@@ -3,7 +3,7 @@ from keras.models import Sequential
 from keras.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense, Dropout
 from joblib import load
 
-def get_model(char_index_path):
+def get_model():
     """
     Builds the model from scratch using the keras library.
 
@@ -22,8 +22,7 @@ def get_model(char_index_path):
               'dataset_dir': "../dataset/small_dataset/"}
 
     model = Sequential()
-    
-    char_index = load(char_index_path)
+    char_index = load('output/char_index.joblib')
     voc_size = len(char_index.keys())
     print(f"voc_size: {voc_size}")
     model.add(Embedding(voc_size + 1, 50, input_length=200)) # Look into this

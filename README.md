@@ -79,13 +79,6 @@ d) To run code security analysis:
 bandit -c bandit.yaml -r .
 ```
 
-# Tests
-To run test:
-
-`pylint`
-
-This will run test in all files with the following name test_*.py
-
 ## Documentation
 ### Project best practices
 The team has chosen to use the cookie cutter template for [data science](https://drivendata.github.io/cookiecutter-data-science/) to ensure correct and reproducible code. Moreover, using a popular file structure for such project will make understanding and finding the code easier for people not involved in this particular project. Except for refactoring the code to this template, the team has also reduced all code to include only its main functionality. Poetry ( https://python-poetry.org/ ) guarantees that the exact same dependencies and sub-dependencies are installed in different machines. The dataset is stored on google drive and is automatically downloaded as part of the pipeline. All exploratory code is in a separate notebook in the notebooks folder.

@@ -8,10 +8,10 @@ def main():
     """
 
     # Get model
-    model, params = get_model('output/char_index.joblib')
+    model, params = get_model()
 
     # Load data
-    x_train = loadjsonlib('output/x_train.joblib')
+    x_train = load('output/x_train.joblib')
     y_train = load('output/y_train.joblib')
     x_val = load('output/x_val.joblib')
     y_val = load('output/y_val.joblib')
@@ -25,8 +25,7 @@ def main():
                 validation_data=(x_val, y_val)
                 )
     # Save model
-    model.save('output/model.h5')
-    model.save('test/data/model.h5')
+    dump(model, 'output/model.joblib')
 
 if __name__ == "__main__":
     main()
