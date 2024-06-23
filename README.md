@@ -82,9 +82,9 @@ bandit -c bandit.yaml -r .
 # Tests
 To run test:
 
-`pylint`
+`poetry run pytest`
 
-This will run test in all files with the following name test_*.py
+This will run test in all files with the following name test_*.py. This might take some time (up to 20 minutes).
 
 ## Documentation
 ### Project best practices
