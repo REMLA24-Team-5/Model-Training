@@ -155,7 +155,7 @@ def test_pipeline(preprocessor):
 
     for index, input in enumerate(inputs):
         input_preprocessed = preprocessor.process_URL(input).reshape(1,200,1) 
-        pred = model.predict(input_preprocessed)
+        pred = model.predict(input_preprocessed, batch_size=1)
         pred = (np.array(pred) > 0.5).astype(int)
         print(pred)
         if pred == gt[index]:
