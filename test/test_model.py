@@ -146,14 +146,14 @@ def test_pipeline(preprocessor):
     preprocessor = fetch_preprocessing()
     model, params = get_model(os.path.join('test/data', 'char_index.joblib'))
     model.load_weights('test/model/model.h5')
-    inputs = ["https://google.com"
-              "http://www.youtube.com"
+    inputs = ["https://google.com",
+              "http://www.youtube.com",
               "http://tudelft.nl"]
     
     gt = [0,0,0]
     acc = 0
 
-    for index, input in enumerate(inputs):
+    for index, input in enuminput_preprocessederate(inputs):
         input_preprocessed = preprocessor.process_URL(input).reshape(1,200,1) 
         pred = model.predict(input_preprocessed, batch_size=1)
         pred = (np.array(pred) > 0.5).astype(int)
