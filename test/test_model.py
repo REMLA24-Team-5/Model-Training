@@ -153,7 +153,7 @@ def test_pipeline(preprocessor):
     gt = [0,0,0]
     acc = 0
 
-    for index, input in enuminput_preprocessederate(inputs):
+    for index, input in enumerate(inputs):
         input_preprocessed = preprocessor.process_URL(input).reshape(1,200,1) 
         pred = model.predict(input_preprocessed, batch_size=1)
         pred = (np.array(pred) > 0.5).astype(int)
