@@ -11,6 +11,7 @@ from src.data.get_data import get_data
 from src.features.process_data import process_data
 from src.models.model_definition import get_model
 from src.models.train import train
+from src.models.predict import evaluate
 from keras.models import load_model
 import tensorflow as tf
 pre_process = importlib.import_module('lib-ml.pre_process')
@@ -79,6 +80,9 @@ def test_train(preprocessor):
 
     assert prediction_binary == 1
 
+def test_evaluate(preprocessor):
+    acc = evaluate('test/model', 'test/data')
+    assert acc > 0
 
 def test_predict_legitimate(preprocessor):
     model, params = get_model(os.path.join('test/data', 'char_index.joblib'))
