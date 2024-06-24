@@ -47,8 +47,8 @@ def test_data_slicing_1():
     y_test = load('test/output/y_test.joblib')
     
     entries = max(len(x_test), 500)
-    end = random.randint(0, entries)
-    start = random.randint(0, end - 1)
+    end = random.randint(0, entries) # nosec B311
+    start = random.randint(0, end - 1)# nosec B311
     
     slice_x = x_test[start:end]
     slice_y = y_test[start:end]

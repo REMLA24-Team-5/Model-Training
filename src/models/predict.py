@@ -1,9 +1,16 @@
 """Module that classifys a given input"""
 import json
 import os
+from pathlib import Path
+import sys
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from joblib import load
 import numpy as np
+
+
+path_root = Path(__file__).parents[2]
+sys.path.append(str(path_root))
+
 
 from src.models.model_definition import get_model
 

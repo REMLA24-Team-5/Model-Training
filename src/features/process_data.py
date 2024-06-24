@@ -43,4 +43,4 @@ def process_data(data_folder):
     return preprocessor
 
 if __name__ == "__main__":
-    process_data('src/data', '')
+    process_data('output')

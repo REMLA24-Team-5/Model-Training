@@ -1,7 +1,12 @@
 """Module that trains model given training data."""
 import os
-from src.models.model_definition import get_model
+from pathlib import Path
+import sys
 from joblib import dump, load
+
+path_root = Path(__file__).parents[2]
+sys.path.append(str(path_root))
+from src.models.model_definition import get_model
 
 def train(char_index_folder, joblib_folder, output_folder=None,output_test=False):
     """
@@ -10,7 +15,6 @@ def train(char_index_folder, joblib_folder, output_folder=None,output_test=False
 
     # Get model
     model, params = get_model(os.path.join(char_index_folder, 'char_index.joblib'))
-
     # Load data
     x_train = load(os.path.join(joblib_folder,'x_train.joblib'))
     y_train = load(os.path.join(joblib_folder, 'y_train.joblib'))
