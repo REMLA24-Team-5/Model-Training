@@ -66,6 +66,19 @@ def test_model_definition(preprocessor):
     assert dropout_count == expected_dropout_count
     assert pool_count == expected_pool_count
 
+def test_train(preprocessor):
+    model = train('test/model', 'test/data')
+    input = "http://txcvg.h.zz.zxx"
+    input_preprocessed = preprocessor.process_URL(input).reshape(1,200,1)
+
+    # Make predictions using the pre-trained model
+    prediction = model.predict(input_preprocessed, batch_size=1)
+
+    # Convert predicted probabilities to binary labels
+    prediction_binary = (np.array(prediction) > 0.5).astype(int)
+
+    assert prediction_binary == 1
+
 
 def test_predict_legitimate(preprocessor):
     model, params = get_model(os.path.join('test/data', 'char_index.joblib'))
