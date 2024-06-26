@@ -1,19 +1,31 @@
 """Module that classifys a given input"""
 import json
+import os
+from pathlib import Path
+import sys
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from joblib import load
 import numpy as np
 
-def main():
+
+path_root = Path(__file__).parents[2]
+sys.path.append(str(path_root))
+
+
+from src.models.model_definition import get_model
+
+
+def evaluate(model_folder, joblib_folder, output_folder=None):
     """
     Takes in input and predicts using model and outputs results.
     """
     np.random.seed()
     # Load model
-    model = load('output/model.joblib')
+    model, params = get_model(os.path.join(model_folder, 'char_index.joblib'))
+    model.load_weights(os.path.join(model_folder, 'model.h5'))
     # Load test data
-    x_test = load('output/x_test.joblib')
-    y_test = load('output/y_test.joblib')
+    x_test = load(os.path.join(joblib_folder, 'x_test.joblib'))
+    y_test = load(os.path.join(joblib_folder,'y_test.joblib'))
 
     # Collect all information into a dictionary
     output_dict = {}
@@ -59,9 +71,11 @@ def main():
     output_dict['accuracy'] = accuracy
 
     # Dump collected information to a JSON file
-    with open('output/metrics.json', 'w', encoding="utf-8") as json_file:
-        json.dump(output_dict, json_file, indent=4)
+    if output_folder:
+        with open(os.path.join(output_folder, 'metrics.json'), 'w', encoding="utf-8") as json_file:
+            json.dump(output_dict, json_file, indent=4)
 
+    return accuracy
 
 if __name__ == "__main__":
-    main()
+    evaluate("output", "output")

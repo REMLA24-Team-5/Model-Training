@@ -17,10 +17,10 @@ def data_gathering():
     shutil.rmtree('output')
 
 def test_feature_processing_1(data_gathering):
-    process_data()
-    assert os.path.exists(os.path.join('output', 'x_train.joblib'))
-    assert os.path.exists(os.path.join('output', 'x_val.joblib'))
-    assert os.path.exists(os.path.join('output', 'x_test.joblib'))
+    process_data('test/data')
+    assert os.path.exists(os.path.join('test/data', 'x_train.joblib'))
+    assert os.path.exists(os.path.join('test/data', 'x_val.joblib'))
+    assert os.path.exists(os.path.join('test/data', 'x_test.joblib'))
 
 
 

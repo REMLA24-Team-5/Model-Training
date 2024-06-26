@@ -17,7 +17,7 @@ def get_model(char_index_path):
               'batch_test': 5000,
               'categories': ['phishing', 'legitimate'],
               'char_index': None,
-              'epoch': 30,
+              'epoch': 1,
               'embedding_dimension': 50,
               'dataset_dir': "../dataset/small_dataset/"}
 
