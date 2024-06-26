@@ -1,7 +1,7 @@
-# URL Phishing | REMLA Team 5
-Simple ML application for detection of Phishing URLs. This repository contains all code to train a new model and test its performance. For installation and usage, see the sections below. The documentation at the end describes the implementation of this repository.
+# Model-training
+This repository contains the entire pipeline of a simple ML application for detection of Phishing URLs, i.e. all code to train a new model and test its performance. For installation and usage, see the sections below. The documentation at the end describes the implementation of this repository.
 
-Note that this project only supports python versions 3.9 and 3.10.
+Note that this project only supports Python versions 3.9 and 3.10.
 
 ## Installation
 
@@ -9,7 +9,7 @@ a) Clone repo.
 
 ```
 $ git clone git@github.com:REMLA24-Team-5/Model-Training.git
-$ cd REMLA-team5
+$ cd Model-Training
 ```
 
 b) Install dependencies.
@@ -20,30 +20,32 @@ $ source venv/bin/activate
 $ pipx install poetry
 $ poetry install
 ```
-If you do not have pipx installed, other installation possibilities can be found in the poetry documentation https://python-poetry.org/docs/.
+If you do not have pipx installed, other installation possibilities can be found in the [poetry documentation](https://python-poetry.org/docs/).
 
-c) create data and output directory
+c) Create data and output directory.
 
 ```
 $ mkdir output
 $ mkdir data
 ```
 
-d) Pull the pipeline using dvc from Google Drive
+d) A remote storage using Google Drive is configured, simply use the following command to pull the data.
 
 ```
 $ dvc pull
 ```
 
+If not done before, DVC will ask to authorize the use of Google Drive. Simply follow the steps that pop up when using the Google Drive remote storage for the first time, see [here](https://dvc.org/doc/user-guide/data-management/remote-storage/google-drive#authorization) for more information.
+
 ## Usage
-a) After implementing changes, run the pipeline and push changes, if any, to the remote
+a) After **implementing changes**, run the pipeline and push changes, if any, to the remote
 
 ```
 $ dvc repro
 $ dvc push
 ```
 
-b) To run experiments and see metrics, do either of the following commands
+b) To **run experiments** and **see metrics**, do either of the following commands
 
 * Show metrics after dvc repro:
 ```
@@ -69,34 +71,38 @@ $ dvc exp run
 $ dvc exp show
 ```
 
-c) To run code quality statistical analysis:
+c) To **run code quality statistical analysis**:
 ```
 pylint src
 ```
 
-d) To run code security analysis:
+d) To **run code security analysis**:
 ```
 bandit -c bandit.yaml -r .
 ```
 
-# Tests
-To run test:
+## Tests
+To run the testing pipeline manually, use the following command:
 
-`poetry run pytest`
+```
+poetry run pytest
+```
 
-This will run test in all files with the following name test_*.py. This might take some time (up to 20 minutes).
+This will run test in all files with the following name: `test_*.py`. This might take some time (up to 30 minutes). All these test are also run when a new push to the repository is made. This ensures that it is quickly noticed when a change breaks the system.
+
+Please note: currently the model training is set to a single epoch, since this makes training quite quick. When training new models this value should be bumped up (e.g. 30), but this will lead to the testing times increasing a lot (hours).
 
 ## Documentation
 ### Project best practices
-The team has chosen to use the cookie cutter template for [data science](https://drivendata.github.io/cookiecutter-data-science/) to ensure correct and reproducible code. Moreover, using a popular file structure for such project will make understanding and finding the code easier for people not involved in this particular project. Except for refactoring the code to this template, the team has also reduced all code to include only its main functionality. Poetry ( https://python-poetry.org/ ) guarantees that the exact same dependencies and sub-dependencies are installed in different machines. The dataset is stored on google drive and is automatically downloaded as part of the pipeline. All exploratory code is in a separate notebook in the notebooks folder.
+The team has chosen to use the [cookie cutter data science](https://drivendata.github.io/cookiecutter-data-science/) template to ensure correct and reproducible code. Moreover, using a popular file structure for such project will make understanding and finding the code easier for people not involved in this particular project. Except for refactoring the code to this template, the team has also reduced all code to include only its main functionality. [Poetry](https://python-poetry.org/) guarantees that the exact same dependencies and sub-dependencies are installed in different machines. The dataset is stored on google drive and is automatically downloaded as part of the pipeline. All exploratory code is in a separate notebook in the notebooks folder.
 
 ### Pipeline Management
-DVC is used for data version control and pipeline management. All different stages of the pipeline can be run with 'dvc repro'. Additionally, DVC is used to report metrics and to keep track of different experiments, models and cached data. Given the relatively simple nature of the model outputs, i.e. it uses two classes, the team has chosen to report the classification scores (multiple metrics such as precision, recall and f1-score) and also include the confusion matrix. These metrics form an all encompassing overview of the model performance, and allows for critical comparison between different models.
+[DVC](https://dvc.org/) is used for data version control and pipeline management. All different stages of the pipeline can be run with `dvc repro`. Additionally, DVC is used to report metrics and to keep track of different experiments, models and cached data. Given the relatively simple nature of the model outputs, i.e. it uses two classes, the team has chosen to report the classification scores (multiple metrics such as precision, recall and f1-score) and also include the confusion matrix. These metrics form an all encompassing overview of the model performance, and allows for critical comparison between different models.
 
 ### Code Quality
 The project implements different ways to display code quality information, considers multiple linters, critically analyses linter rules, and proposes new missing ML rules.
 
-Pylint is used to enforce good code quality by settings certain rules. We use DSLinter (https://pypi.org/project/dslinter/) which is an extension for pylint, specifically for machine learning development. DSLinter also provides a customized .pylintrc file which defines all the linter rules. We are using this file except we removed all linter options for pytorch since we are not using the library. The .pylintrc provided first removes all basic pylint rules since standard naming conventions are counterintuitive to machine learning conventions (snake_case vs X_train for example). The rules then instantiated and used are:
+Pylint is used to enforce good code quality by settings certain rules. We use [DSLinter](https://pypi.org/project/dslinter/) which is an extension for pylint, specifically for machine learning development. DSLinter also provides a customized .pylintrc file which defines all the linter rules. We are using this file except we removed all linter options for pytorch since we are not using the library. The .pylintrc provided first removes all basic pylint rules since standard naming conventions are counterintuitive to machine learning conventions (snake_case vs X_train for example). The rules then instantiated and used are:
 
 ```
 import: check for missing imports and if existing import use correct naming conventions.
@@ -230,7 +236,7 @@ Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
 
 ```
 
-The project is configured to be able to run the code security scanner Bandit. One line in the preprocessing of data, more specifically in the Tokenization of the input data raised an issue with Bandit. This is because Bandit scans for variables with the string "token" included in the name to check for possible hardcoded passwords. In the ML context, tokens more often than not do not refer to passwords but rather word tokens in Tokenization of input text. Thus, this line of code is skipped when running Bandit.
+The project is configured to be able to run the code security scanner [Bandit](https://github.com/PyCQA/bandit). One line in the preprocessing of data, more specifically in the tokenization of the input data raised an issue with Bandit. This is because Bandit scans for variables with the string "token" included in the name to check for possible hardcoded passwords. In the ML context, tokens more often than not do not refer to passwords but rather word tokens in Tokenization of input text. Thus, this line of code is skipped when running Bandit.
 
 Bandit run results:
 ```
