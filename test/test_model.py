@@ -3,8 +3,12 @@ import importlib
 import shutil
 import pytest
 import gdown
-import numpy as np
 import os
+import random
+import string
+import tensorflow as tf
+import numpy as np
+
 from joblib import load
 from keras.layers import Conv1D, MaxPooling1D, Dropout
 from src.data.get_data import get_data
@@ -13,7 +17,6 @@ from src.models.model_definition import get_model
 from src.models.train import train
 from src.models.predict import evaluate
 from keras.models import load_model
-import tensorflow as tf
 pre_process = importlib.import_module('lib-ml.pre_process')
 
 
@@ -43,6 +46,24 @@ def create_joblibs():
         os.mkdir('test/data')
     get_data('test/data', 'test/data')
     process_data('test/data')
+
+def mutate_string(s, start_idx, end_idx):
+    # Ensure start_idx and end_idx are within the bounds of the string
+    start_idx = max(0, start_idx)
+    end_idx = min(len(s), end_idx)
+    
+    if start_idx >= end_idx:
+        raise ValueError("start_idx should be less than end_idx")
+    
+    # Convert the string to a list for easy mutation
+    s_list = list(s)
+    
+    for i in range(start_idx, end_idx):
+        s_list[i] = random.choice(string.printable)
+    
+    mutated_string = ''.join(s_list)
+    
+    return mutated_string
 
 @pytest.fixture(scope="session", autouse=True)
 def preprocessor():
@@ -113,23 +134,33 @@ def test_predict_phising(preprocessor):
     assert prediction_binary == 1
 
 
-def test_mutamorphic(preprocessor):
+def test_mutamorphic_legit(preprocessor):
     model, params = get_model(os.path.join('test/model', 'char_index.joblib'))
     model.load_weights('test/model/model.h5')
-    input_1 = "http://google.com"
-    input_1_preprocessed = preprocessor.process_URL(input_1).reshape(1,200,1)
+    input = "http://google.com"
 
-    input_2 = "https://google.nl"
-    input_2_preprocessed = preprocessor.process_URL(input_2).reshape(1,200,1)
-    # Make predictions using the pre-trained model
-    prediction_1 = model.predict(input_1_preprocessed, batch_size=1)
-    prediction_binary_1 = (np.array(prediction_1) > 0.5).astype(int)
+    for i in range(10):
+        test_string = mutate_string(input, 9, 11)
+        test_preprocessed = preprocessor.process_URL(test_string).reshape(1,200,1)
 
-    prediction_2 = model.predict(input_2_preprocessed, batch_size=1)
-    prediction_binary_2 = (np.array(prediction_2) > 0.5).astype(int)
+        prediction = model.predict(test_preprocessed, batch_size=1)
+        prediction_binary = (np.array(prediction) > 0.5).astype(int)
+        assert prediction_binary == 0
 
-    # Todo: Fix for final submission
-    assert prediction_binary_1 != prediction_binary_2
+
+def test_mutamorphic_phising(preprocessor):
+    model, params = get_model(os.path.join('test/model', 'char_index.joblib'))
+    model.load_weights('test/model/model.h5')
+    input = "http://txcvg.h.zz.zxx.hhhh"
+
+    for i in range(10):
+        test_string = mutate_string(input,0, 10)
+        test_preprocessed = preprocessor.process_URL(test_string).reshape(1,200,1)
+
+        prediction = model.predict(test_preprocessed, batch_size=1)
+        prediction_binary = (np.array(prediction) > 0.5).astype(int)
+        assert prediction_binary == 1
+
 
 
 def test_non_determinisim(preprocessor):
