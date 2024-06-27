@@ -59,7 +59,7 @@ def mutate_string(s, start_idx, end_idx):
     s_list = list(s)
     
     for i in range(start_idx, end_idx):
-        s_list[i] = random.choice(string.printable)
+        s_list[i] = random.choice(string.printable) # nosec B311
     
     mutated_string = ''.join(s_list)
     
